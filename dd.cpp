@@ -1,61 +1,56 @@
-#include <bits/stdc++.h>
+// Created by Nguyễn Mạnh Quân
+
+#include<bits/stdc++.h>
+
 using namespace std;
- 
-#define ms(s,n) memset(s,n,sizeof(s))
-#define all(a) a.begin(),a.end()
-#define present(t, x) (t.find(x) != t.end())
-#define sz(a) int((a).size())
-#define FOR(i, a, b) for (int i = (a); i < (b); ++i)
-#define FORd(i, a, b) for (int i = (a) - 1; i >= (b); --i)
-#define pb push_back
-#define pf push_front
+
+#define mp make_pair
 #define fi first
 #define se second
-#define mp make_pair
- 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double ld;
-typedef pair<int,int> pi;
-typedef vector<int> vi;
-typedef vector<pi> vii;
- 
-const int MOD = (int) 1e9+7;
-const int INF = (int) 1e9+1;
-inline ll gcd(ll a,ll b){ll r;while(b){r=a%b;a=b;b=r;}return a;}
-inline ll lcm(ll a,ll b){return a/gcd(a,b)*b;}
- 
- 
-int main(){
-//	#ifndef ONLINE_JUDGE
-//	freopen("input.txt", "r", stdin);
-//	freopen("output.txt", "w", stdout);
-//	#endif
-	int t; cin >> t;
-	while(t--){
-		int n; cin >> n;
-		int a[n][n];
-		int hang[n] ={0}, cot[n]={0};
-		FOR(i, 0, n){
-			FOR(j, 0, n){
-				cin >> a[i][j];
-				hang[i] += a[i][j];
-				cot[j] += a[i][j];
-			}
-		}
-		int final = max(*max_element(hang, hang +n), *max_element(cot, cot+n));
-		int ans = 0;
-		int i = 0, j = 0;
-		while(i < n && j < n){
-			int r = min(final - hang[i], final - cot[j]);
-			a[i][j] += r;
-			hang[i] += r;
-			cot[j] += r;
-			ans += r;
-			if(hang[i] == final) ++i;
-			if(cot[j] == final) ++j;
-		}
-		cout << ans << endl;
-	}
-	return 0;
+#define pb push_back
+#define sz size()
+#define ll long long
+#define FOR(i, a, b) for(int i = a; i <= b; i++)
+#define FORD(i, a, b) for(int i = a; i >= b; i--)
+#define F(i, a, b) for(int i = a; i < b; ++i)
+#define FD(i, a, b) for(int i = a; i > b; --i)
+#define faster() ios_base::sync_with_stdio(0); cin.tie(NULL);cout.tie(NULL);
+#define vi vector<int>
+#define vll vector<ll>
+#define all(x) (x).begin(), (x).end()
+#define endl '\n'
+
+int main()
+{
+    faster();
+    int t = 1, x, y, z, a;
+    cin >> t;
+    while(t--)
+    {
+        cin >> x >> y >> z;
+        ll a[x], b[y], c[z];
+        F(i, 0, x) cin >> a[i];
+        F(i, 0, y) cin >> b[i];
+        F(i, 0, z) cin >> c[i];
+        int idxA, idxB, idxC;
+        idxA = idxB = idxC = 0;
+        multiset<ll> ans;
+        while(idxA < x && idxB < y && idxC < z)
+        {
+            if(a[idxA] == b[idxB] && b[idxB] == c[idxC])
+            {
+                ans.insert(a[idxA]);
+                ++idxA;
+                ++idxB;
+                ++idxC;
+            }
+            else if(a[idxA] < b[idxB]) ++idxA;
+            else if(b[idxB] < c[idxC]) ++idxB;
+            else ++idxC;
+        }
+        if(ans.empty()) cout << -1;
+        else for(ll i : ans) cout << i << ' ';
+        cout << endl;
+    }
+    return 0;
 }
