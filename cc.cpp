@@ -1,20 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
-// string nhan(string a, string b){
-//     string s="";
-//     int l=a.length();
-//     string s1[l];
-//     for(int i=l-1;i>=0;i--){
-//         s1[i]=nhanNho(a[i],b);
-//         s1[i].insert(s1[i].length(),l-i-1,'0');   
-//         s=cong(s,s1[i]);
-//     }
-//     return s;
-// }
-int main()
-{
-    string s;
-    cin>>s;
-    s.insert(2,"0000");
-    cout<<s;
+struct point{
+    double x,y;
+    double distance(point h){
+        return sqrt(pow(x - h.x,2) + pow(y-h.y,2));
+    }
+};
+int main(){
+    #ifndef ONLINE_JUDGE
+   freopen("INPUT.txt","r",stdin);
+   freopen("OUTPUT.txt","w",stdout);
+   #endif
+    struct point a,b,c;
+    int T;
+    cin >>T;
+    while(T--){
+        cin >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y;
+        double x1 = a.distance(b), x2 = a.distance(c), x3 = b.distance(c);
+    if(x1 <= 0 || x2<=0 || x3<=0 || x1 + x2 <=x3 ||x1+x3<=x2||x2+x3 <= x1){
+        cout<<"INVALID"<<endl;
+        continue;
+    }
+ //   cout<< x1 << " "<<x2 <<" "<<x3<<endl;
+    double p =(x1+x2+x3)/2;
+    double S = sqrt(p *(p-x1) * (p-x2) *(p-x3));
+    cout<<fixed <<setprecision(2) <<S<<endl;
+
+}
+    return 0;
 }

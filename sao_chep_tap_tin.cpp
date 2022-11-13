@@ -2,12 +2,14 @@
 using namespace std;
 int main()
 {
-    ifstream in("PTIT.in");
-    ofstream out("PTIT.out");
-    string tok;
-    while(getline(in,tok))
+    ifstream in;
+    ofstream out;
+    in.open("PTIT.in");
+    out.open("PTIT.out");
+    string a;
+    while(getline(in,a))
     {
-        out<<tok<<endl;
+        out<<a<<endl;
     }
     in.close();
     out.close();
