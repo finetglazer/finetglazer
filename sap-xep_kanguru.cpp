@@ -25,10 +25,9 @@ int main()
         for (int i = cnt - 1; i >= 0; i--)
         {
             int index = lower_bound(a.begin(), a.end(), vv[i] * 2) - a.begin();
-            if(a[index]<a[a.size()-1]) index=a.size()-1;
             if (index >= 0 && index < a.size())
             {
-                cout<<vv[i]<<" "<<a[index]<<endl;
+                // cout<<vv[i]<<" "<<a[index]<<endl;
                 st++;
                 a.erase(a.begin() + index);
             }
