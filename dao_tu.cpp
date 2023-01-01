@@ -1,24 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
+void in(stack<string> s)
+{
+    while(!s.empty())
+    {
+        cout<<s.top()<<" ";
+        s.pop();
+    }
+    cout<<endl;
+}
+
 int main()
 {
-    int t;cin>>t;cin.ignore();
+    int t;
+    cin>>t;
+    cin.ignore();
+    string s;
     while(t--)
     {
-        
-        string a;
-        getline(cin,a);
-        vector<string> vv;
-        stringstream ss(a);
+        stack<string> st;
+        getline(cin,s);
+        stringstream ss(s);
         string tok;
         while(ss>>tok)
         {
-            vv.push_back(tok);
+            st.push(tok);
         }
-        for(int i=vv.size()-1;i>=0;i--)
-        {
-            cout<<vv[i]<<" ";
-        }
-        cout<<endl;
+        in(st);
     }
 }
