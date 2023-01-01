@@ -1,5 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
+int numDecodings(string s)
+{
+    int n = s.size() - 1;
+    int dp[n + 5];
+    for (int i = 0; i < n + 5; i++)
+        dp[i] = 1;
+    // for(int i=0;i<n+5;i++) cout<<dp[i]<<" ";
+    // 0 dp[0]=0
+    // 1 2 2 4
+    // 5 3 2 1
+    // dp[0]= dp[1](s[i]!=0): [1] +[2->4]//3
+    // dp[0]+=dp[2]: [12] [2-4]-> [2][4] , [24]//2
+    for (int i = n; i >= 0; i--)
+    {
+        if (s[i] == '0')
+            dp[i] = 0;
+        else
+            dp[i] = dp[i + 1];
+        if (i + 1 <= n && ((s[i] == '1') || (s[i] == '2' && s[i + 1] >= '0' && s[i + 1] <= '6')))
+        {
+            dp[i] += dp[i + 2];
+        }
+    }
+    return dp[0];
+}
 int main()
 {
     int t;
@@ -7,45 +32,7 @@ int main()
     while (t--)
     {
         string s;
-        cin >> s;
-        if (s[0] == '0')
-            cout << "0" << endl;
-        else
-        {
-            int n = s.size();
-            s = 'x' + s;
-            int dp[n + 5][n + 5];
-            memset(dp, 0, sizeof(dp));
-            for (int i = 1; i <= n; i++)
-                dp[i][i] = 1;
-            for (int len = 2; len <= n; len++)
-            {
-                for (int i = 1; i <= n - len + 1; i++)
-                {
-                    int j = i + len - 1;
-                    if (len == 2)
-                    {
-                        if (s[i] == '2' && s[j] >= '0' && s[j] <= '6')
-                        {
-                            dp[i][j] += 1;
-                        }
-                        if(s[i]=='1') dp[i][j]++;
-                    }
-                    // else{
-                    //     if(dp[i][j-1]>dp[i+1][j]) dp[i][j]=dp[i][j-1];
-                    //     else dp[i][j]=dp[i][j-1]+dp[i+1][j]-1;
-                    // }
-                }
-
-            }
-            for(int i=1;i<=n;i++)          
-            {
-                for(int j=1;j<=n;j++)
-                {
-                    cout<<dp[i][j]<<" ";
-                }
-                cout<<endl;
-            }
-        }
+        cin>>s;
+        cout<<numDecodings(s)<<endl;
     }
 }
